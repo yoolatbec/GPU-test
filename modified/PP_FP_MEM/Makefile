@@ -9,7 +9,15 @@ mem: $(SRC)
 mem_s: $(SRC)
 	$(CC) $(SRC) -o $@ -DSEPERATE
 
-.PHONY: run
+.PHONY: run run_inv clean
 run: mem mem_s
 	-./mem
 	-./mem_s
+
+run_inv: mem mem_s
+	-./mem_s
+	-./mem
+
+clean:
+	-rm mem
+	-rm mem_s

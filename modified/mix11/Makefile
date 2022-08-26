@@ -8,7 +8,15 @@ mix11: $(SRC)
 mix11_s: $(SRC)
 	$(CC) $(SRC) -o $@ -DSEPERATE
 
-.PHONY: run
+.PHONY: run run_inv clean
 run: mix11 mix11_s
 	-./mix11
 	-./mix11_s
+
+run_inv: mix11 mix11_s
+	-./mix11_s
+	-./mix11
+
+clean:
+	-rm mix11
+	-rm mix11_s

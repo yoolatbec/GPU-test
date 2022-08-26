@@ -160,7 +160,9 @@ __global__ void VecAdd(const float* A, const float* B, float* C, int N)
 		//}
 }
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 // Host code
 int main(int argc, char** argv)

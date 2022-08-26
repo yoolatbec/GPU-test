@@ -5999,7 +5999,9 @@ void LagrangeLeapFrog(int useCPU)
    // LagrangeRelease() ;  Creation/destruction of temps may be important to capture 
 }
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 int main(int argc, char *argv[])
 {

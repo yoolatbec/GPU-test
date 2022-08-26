@@ -5,7 +5,9 @@
 #include <iostream>
 #include <fstream>
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
  
 /*
  * Options 

@@ -14,7 +14,7 @@ euler3d_double: euler3d_double.cu
 euler3d_double_s: euler3d_double.cu
 	$(CC) euler3d_double.cu -o $@ -DSEPERATE
 
-.PHONY: run run_double
+.PHONY: run run_double run_inv run_double_inv clean
 run: euler3d euler3d_s
 	-./euler3d fvcorr.domn.097k
 	-./euler3d_s fvcorr.domn.097k
@@ -22,3 +22,15 @@ run: euler3d euler3d_s
 run_double: euler3d_double euler3d_double_s
 	-./euler3d_double fvcorr.domn.097k
 	-./euler3d_double_s fvcorr.domn.097k
+
+run_inv: euler3d euler3d_s
+	-./euler3d_s fvcorr.domn.097k
+	-./euler3d fvcorr.domn.097k
+
+run_double_inv: euler3d_double_s euler3d_double
+	-./euler3d_double_s fvcorr.domn.097k
+	-./euler3d_double fvcorr.domn.097k
+
+clean:
+	-rm euler3d euler3d_s
+	-rm euler3d_double euler3d_double_s

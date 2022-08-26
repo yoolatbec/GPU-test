@@ -16,7 +16,9 @@
 #include <sys/stat.h>
 #include <cuda_runtime.h>
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 /*############################################################################*/
 static LBM_Grid CUDA_srcGrid, CUDA_dstGrid;
@@ -64,8 +66,8 @@ int main( int nArgs, char* arg[] ) {
             min_time = elapsed_time;
         }
 
-#ifdef MODIFIED
-        printf("modified version. ");
+#ifdef SEPERATE
+        printf("seperate version. ");
 #endif
 
         printf("elapsed time: %f ms, min time: %f ms\n", elapsed_time, min_time);
@@ -178,7 +180,7 @@ void MAIN_finalize( const MAIN_Param* param ) {
 
 	// LBM_showGridStatistics( TEMP_srcGrid );
 
-	LBM_storeVelocityField( TEMP_srcGrid, param->resultFilename, TRUE );
+	// LBM_storeVelocityField( TEMP_srcGrid, param->resultFilename, TRUE );
 
 	LBM_freeGrid( (float**) &TEMP_srcGrid );
 	CUDA_LBM_freeGrid( (float**) &CUDA_srcGrid );

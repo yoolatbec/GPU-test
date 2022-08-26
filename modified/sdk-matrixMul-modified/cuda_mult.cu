@@ -290,7 +290,9 @@ __global__ void mult_gpu(float *A, float *B, float *C, int wA, int wB){
     C[c + wB * ty + tx] = Csub;
 }
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 int main(int argc, char *argv[]){
   	int i;

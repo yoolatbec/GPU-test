@@ -192,7 +192,9 @@ __global__ void tex_bm_kernel( float* out, unsigned size)
 
 }
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 
 ////////////////////////////////////////////////////////////////////////////////

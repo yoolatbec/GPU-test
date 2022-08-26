@@ -21,7 +21,9 @@
 //	DEFINE / INCLUDE
 //====================================================================================================100
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 #include <stdlib.h>
 #include <math.h>

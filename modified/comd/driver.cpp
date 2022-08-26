@@ -1,8 +1,9 @@
 #include "interface.h"
 #include "utility.h" 
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
-
+#endif
 // CUDA wrappers
 extern "C" void advance_position(sim_t sim_D);
 extern "C" void advance_velocity(sim_t sim_D);

@@ -9,8 +9,16 @@ lulesh: $(SRC)
 lulesh_s: $(SRC)
 	$(CC) $(SRC) -o $@ -DSEPERATE
 
-.PHONY: run
+.PHONY: run run_inv clean
 run: lulesh lulesh_s
 	-./lulesh
 	-./lulesh_s
 
+run_inv: lulesh lulesh_s
+	-./lulesh_s
+	-./lulesh
+
+
+clean:
+	-rm lulesh
+	-rm lulesh_s

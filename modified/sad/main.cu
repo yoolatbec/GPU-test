@@ -23,7 +23,9 @@
     if (err) fprintf(stderr, "CUDA error: %s\n", cudaGetErrorString(err)); \
   }
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 static unsigned short *
 load_sads(char *filename);

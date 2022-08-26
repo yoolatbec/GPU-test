@@ -614,7 +614,9 @@ void particleFilter(int * I, int IszX, int IszY, int Nfr, int * seed, int Nparti
   free(ind);
 }
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 int main(int argc, char * argv[]){
   char* usage = "naive.out -x <dimX> -y <dimY> -z <Nfr> -np <Nparticles>";

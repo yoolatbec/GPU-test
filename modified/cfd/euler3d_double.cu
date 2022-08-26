@@ -5,7 +5,9 @@
 #include <iostream>
 #include <fstream>
 
+#ifndef TEST_ROUND
 #define TEST_ROUND 9
+#endif
 
 #if CUDART_VERSION < 3000
 struct double3
