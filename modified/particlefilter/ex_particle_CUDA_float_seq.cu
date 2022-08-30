@@ -918,7 +918,7 @@ void particleFilter(unsigned char * I, int IszX, int IszY, int Nfr, int * seed, 
 }
 
 #ifndef TEST_ROUND
-#define TEST_ROUND 9
+#define TEST_ROUND 19
 #endif
 
 int main(int argc, char * argv[]) {

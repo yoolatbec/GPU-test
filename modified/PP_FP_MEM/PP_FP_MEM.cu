@@ -132,8 +132,10 @@ __global__ void VecAdd(const float* A, const float* B, float* C, int N)
 		__syncthreads();
 
 		while (counter[0] < FIRST_PHASE_TIME) {
-            float tc = counter[k] + 1;
-            float tr = result[k] * result[k];
+            long tc = counter[k] + 1;
+            double tr = result[k] * result[k];
+            // float tr = result[k];
+            // tr *= tr;
 			counter[k] = tc;
 			result[k] = tr;
 		}
@@ -145,8 +147,8 @@ __global__ void VecAdd(const float* A, const float* B, float* C, int N)
 
 		if (thread_id < 32) {
 			while (counter[0] < SECOND_PHASE_TIME) {
-				float tc = counter[k] + 1;
-                float tr = result[k] * result[k];
+				long tc = counter[k] + 1;
+                double tr = result[k] * result[k];
                 counter[k] = tc;
                 result[k] = tr;
 			}

@@ -1,12 +1,19 @@
 CC = nvcc
 
 all: srad srad_s
+debug: srad_g srad_sg
 
 srad: *.cu *.c *.h
 	$(CC) main.cu -o $@
 
 srad_s: *.cu *.c *.h
 	$(CC) main.cu -o $@ -DSEPERATE
+
+srad_g: *.cu *.c *.h
+	$(CC) main.cu -G -o $@
+
+srad_sg: *.cu *.c *.h
+	$(CC) main.cu -G -o $@ DSEPERATE
 
 .PHONY: run run_inv clean
 run: srad srad_s
@@ -20,3 +27,5 @@ run_inv: srad srad_s
 clean:
 	-rm srad
 	-rm srad_s
+	-rm srad_g
+	-rm srad_sg

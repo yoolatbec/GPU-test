@@ -1,6 +1,7 @@
 CC = nvcc
 
 all: float float_s naive naive_s
+debug: float_g float_sg naive_g naive_sg
 
 float: ex_particle_CUDA_float_seq.cu
 	$(CC) $< -o $@
@@ -13,6 +14,18 @@ naive: ex_particle_CUDA_naive_seq.cu
 
 naive_s: ex_particle_CUDA_naive_seq.cu
 	$(CC) $< -o $@ -DSEPERATE
+
+float_g: ex_particle_CUDA_float_seq.cu
+	$(CC) $< -G -o $@
+
+float_sg: ex_particle_CUDA_float_seq.cu
+	$(CC) $< -G -o $@ -DSEPERATE
+
+naive_g: ex_particle_CUDA_naive_seq.cu
+	$(CC) $< -G -o $@
+
+naive_sg: ex_particle_CUDA_naive_seq.cu
+	$(CC) $< -G -o $@ -DSEPERATE
 
 .PHONY: run run_naive run_inv run_naive_inv clean
 run: float float_s
@@ -36,3 +49,7 @@ clean:
 	-rm float_s
 	-rm naive
 	-rm naive_s
+	-rm float_g
+	-rm float_sg
+	-rm naive_g
+	-rm naive_sg
