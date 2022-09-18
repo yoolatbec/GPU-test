@@ -1,0 +1,24 @@
+CC = clang++
+SRC = backprop_cuda.cu backprop.c facetrain.c imagenet.c
+LIBS = -lcudart -lcuda -ldl -lrt -pthread
+
+all: backprop backprop_s
+
+backprop: $(SRC) *.h
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
+
+backprop_s: $(SRC) *.h
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
+
+.PHONY: run run_inv clean
+run: backprop backprop_s
+	-./backprop 480000
+	-./backprop_s 480000
+
+run_inv: backprop backprop_s
+	-./backprop_s 480000
+	-./backprop 480000
+
+clean:
+	-rm backprop
+	-rm backprop_s

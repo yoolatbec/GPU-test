@@ -26,6 +26,18 @@ make run
 make run_inv
 ```
 
+默认nvcc进行编译。如果需要使用clang进行编译：
+
+1. 定义CUDA_INC和CUDA_LIB环境变量，分别指向cuda头文件和库文件所在的目录
+
+2. 使用make编译时指定makefile文件
+
+  ```
+  make -f Makefile_llvm run
+  ```
+
+   
+
 ## 运行时间
 
 ### 本地：GTX1650+nvcc

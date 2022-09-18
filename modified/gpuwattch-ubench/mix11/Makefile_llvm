@@ -1,0 +1,24 @@
+CC = clang++
+SRC = kernel.cu
+LIBS = -lcudart -lcuda -ldl -lrt -pthread
+
+all: mix11 mix11_s
+
+mix11: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
+
+mix11_s: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
+
+.PHONY: run run_inv clean
+run: mix11 mix11_s
+	-./mix11
+	-./mix11_s
+
+run_inv: mix11 mix11_s
+	-./mix11_s
+	-./mix11
+
+clean:
+	-rm mix11
+	-rm mix11_s

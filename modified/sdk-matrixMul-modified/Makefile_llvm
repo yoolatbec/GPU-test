@@ -1,0 +1,24 @@
+CC = clang++
+SRC = cuda_mult.cu
+LIBS = -lcudart -lcuda -ldl -lrt -pthread
+
+all: mult mult_s
+
+mult: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
+
+mult_s: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
+
+.PHONY: run run_inv clean
+run: mult mult_s
+	-./mult 4096
+	-./mult_s 4096
+
+run_inv: mult mult_s
+	-./mult_s 4096
+	-./mult 4096
+
+clean:
+	-rm mult
+	-rm mult_s

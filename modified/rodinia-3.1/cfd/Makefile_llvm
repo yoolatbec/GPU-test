@@ -1,0 +1,37 @@
+CC = clang++
+LIBS = -lcudart -lcuda -ldl -lrt -pthread
+
+all: euler3d euler3d_s euler3d_double euler3d_double_s
+
+euler3d: euler3d.cu
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $< $(LIBS)
+
+euler3d_s: euler3d.cu
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $< $(LIBS) -DSEPERATE
+
+euler3d_double: euler3d_double.cu
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $< $(LIBS)
+
+euler3d_double_s: euler3d_double.cu
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $< $(LIBS) -DSEPERATE
+
+.PHONY: run run_double run_inv run_double_inv clean
+run: euler3d euler3d_s
+	-./euler3d fvcorr.domn.097k
+	-./euler3d_s fvcorr.domn.097k
+
+run_double: euler3d_double euler3d_double_s
+	-./euler3d_double fvcorr.domn.097k
+	-./euler3d_double_s fvcorr.domn.097k
+
+run_inv: euler3d euler3d_s
+	-./euler3d_s fvcorr.domn.097k
+	-./euler3d fvcorr.domn.097k
+
+run_double_inv: euler3d_double_s euler3d_double
+	-./euler3d_double_s fvcorr.domn.097k
+	-./euler3d_double fvcorr.domn.097k
+
+clean:
+	-rm euler3d euler3d_s
+	-rm euler3d_double euler3d_double_s

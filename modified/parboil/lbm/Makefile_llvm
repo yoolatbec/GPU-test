@@ -1,0 +1,24 @@
+CC = clang++
+SRC = main.cu parboil_cuda.c lbm.cu
+LIBS = -lcudart -lcuda -ldl -lrt -pthread
+
+all: lbm lbm_s
+
+lbm: *.cu *.h *.c
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
+
+lbm_s: *.cu *.h *.c
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
+
+.PHONY: run run_inv clean
+run: lbm lbm_s
+	-./lbm 200
+	-./lbm_s 200
+
+run_inv: lbm lbm_s
+	-./lbm_s 200
+	-./lbm 200
+
+clean:
+	-rm lbm
+	-rm lbm_s

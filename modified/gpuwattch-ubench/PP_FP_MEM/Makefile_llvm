@@ -1,0 +1,24 @@
+CC = clang++
+SRC = PP_FP_MEM.cu
+LIBS = -lcudart -lcuda -ldl -lrt -pthread
+
+all: mem mem_s
+
+mem: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
+
+mem_s: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
+
+.PHONY: run run_inv clean
+run: mem mem_s
+	-./mem
+	-./mem_s
+
+run_inv: mem mem_s
+	-./mem_s
+	-./mem
+
+clean:
+	-rm mem
+	-rm mem_s

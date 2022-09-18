@@ -1,0 +1,25 @@
+CC = clang++
+SRC = lulesh.cu
+LIBS = -lcudart -lcuda -ldl -lrt -pthread
+
+all: lulesh lulesh_s
+
+lulesh: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
+
+lulesh_s: $(SRC)
+	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
+
+.PHONY: run run_inv clean
+run: lulesh lulesh_s
+	-./lulesh
+	-./lulesh_s
+
+run_inv: lulesh lulesh_s
+	-./lulesh_s
+	-./lulesh
+
+
+clean:
+	-rm lulesh
+	-rm lulesh_s
