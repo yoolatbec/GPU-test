@@ -1,6 +1,6 @@
 CC = clang++
 SRC = backprop_cuda.cu backprop.c facetrain.c imagenet.c
-LIBS = -lcudart -lcuda -ldl -lrt -pthread
+LIBS = -lcudart -lcuda -ldl -lrt -pthread -lm
 
 all: backprop backprop_s
 

@@ -6,10 +6,10 @@ LIBS = -lcudart -lcuda -ldl -lrt -pthread
 all: comd comd_s
 
 comd: $(SRC) *.h ./prototypes/*.h ./utils/*.h
-	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
+	$(CC) -o $@ -I$(CUDA_INC) $(INC) -L$(CUDA_LIB) $(SRC) $(LIBS)
 
 comd_s: $(SRC) *.h ./prototypes/*.h ./utils/*.h
-	$(CC) -o $@ -I$(CUDA_INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
+	$(CC) -o $@ -I$(CUDA_INC) $(INC) -L$(CUDA_LIB) $(SRC) $(LIBS) -DSEPERATE
 
 .PHONY: run run_inv clean
 run: comd comd_s

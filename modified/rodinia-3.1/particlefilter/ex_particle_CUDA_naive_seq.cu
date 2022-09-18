@@ -3,6 +3,7 @@
  * @author Michael Trotter & Matt Goodrum
  * @brief Particle filter implementation in C/OpenMP 
  */
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

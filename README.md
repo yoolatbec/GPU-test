@@ -77,3 +77,23 @@ make run_inv
 | srad_v1                | 6.28ms    | 5.84ms    |
 
 \* cfd和cfd double在A100上没有正常运行。
+
+### A100+clang
+
+|                        |     未优化      |      优化       |
+| ---------------------- | :-------------: | :-------------: |
+| backprop               |    0.4770ms     |    0.5104ms     |
+| cfd                    |        -        |        -        |
+| cfd double             |        -        |        -        |
+| comd                   |      336ms      |      343ms      |
+| lbm                    |      250ms      |      253ms      |
+| lulesh                 |     1397ms      |     1417ms      |
+| mix11                  |        -        |        -        |
+| particlefilter         |     64.45ms     |     65.34ms     |
+| particlefilter naive*  |  23.22ms/18ms   |  26.01ms/16ms   |
+| PP_FP_MEM              |     2.29ms      |     2.61ms      |
+| sad                    |     1.13ms      |     1.16ms      |
+| sdk-matrixMul-modified |      248ms      |      243ms      |
+| srad_v1*               | 15.44ms/17.62ms | 16.22ms/16.84ms |
+
+\* 改变两个版本的程序的运行顺序会产生不同的结果
